@@ -9,6 +9,6 @@ namespace DataAssemblyLine.Domain.Steps
     public abstract class Step: Entity
     {
         public Step NextStep { get; private set; }
-        public abstract Task RunAsync();
+        public string Label { get; private set; }
     }
 }
