@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAssemblyLine.Domain.Items
 {
-    public abstract class Item: Entity
+    public abstract class Item: AggregateRoot
     {
         public DateTime Created { get; set; }
         public string CurrentData { get; private set; }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAssemblyLine.Domain.Common
 {
-    public abstract class Entity
+    public abstract class AggregateRoot
     {
         public List<INotification> DomainEvents { get; private set; }
 
