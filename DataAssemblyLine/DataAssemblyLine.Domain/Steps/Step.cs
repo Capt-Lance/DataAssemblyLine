@@ -8,7 +8,7 @@ namespace DataAssemblyLine.Domain.Steps
 {
     public abstract class Step: Entity
     {
-        public Step NextStep { get; private set; }
         public string Label { get; private set; }
+        public Step NextStep { get; private set; }
     }
 }
