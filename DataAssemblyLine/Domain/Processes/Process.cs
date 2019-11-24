@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAssemblyLine.Domain.Processes
 {
-    public class Process: Entity
+    public abstract class Process: Entity
     {
         public Client Client { get; private set; }
         public string Description { get; private set; }

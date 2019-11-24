@@ -4,37 +4,47 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAssemblyLine.Domain
+namespace DataAssemblyLine.Domain.Items
 {
-    public abstract class Item<T>: Entity
+    public abstract class Item: Entity
     {
         public DateTime Created { get; set; }
-        public T CurrentData { get; private set; }
+        public string CurrentData { get; private set; }
         public string FailureMessage { get; private set; }
-        public T InitialData { get; private set; }
+        public string InitialData { get; private set; }
         public bool IsFailed { get; private set; }
         public bool IsProcessed { get; private set; }
         public Step LastCompletedStep { get; private set; }
         public DateTime Modified { get; set; }
-        public void CompleteStep(Step stepCompleted, T data)
+        public void CompleteStep(Step stepCompleted, string data)
         {
             LastCompletedStep = stepCompleted;
             CurrentData = data;
             Modified = DateTime.UtcNow;
         }
 
-        public void MarkAsFailure(string reason)
+        public void SetStepFailed(string reason)
         {
             IsFailed = true;
             FailureMessage = reason;
+            AddDomainEvent(new ItemStepFailedEvent());
         }
 
-        public void MarkAsProcessed(Step stepCompleted, T data)
+        public void SetStepCompleted(Step stepCompleted, string data)
+        {
+            LastCompletedStep = stepCompleted;
+            CurrentData = data;
+            Modified = DateTime.UtcNow;
+            AddDomainEvent(new ItemStepCompletedEvent());
+        }
+
+        public void SetProcessCompleted(Step stepCompleted, string data)
         {
             LastCompletedStep = stepCompleted;
             CurrentData = data;
             Modified = DateTime.UtcNow;
             IsProcessed = true;
+            AddDomainEvent(new ItemProcessCompletedEvent());
         }
     }
 }
