@@ -1,7 +1,5 @@
 ﻿using DataAssemblyLine.Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using DataAssemblyLine.Domain.Items;
 using System.Threading.Tasks;
 
 namespace DataAssemblyLine.Domain.Steps
@@ -10,5 +8,6 @@ namespace DataAssemblyLine.Domain.Steps
     {
         public string Label { get; private set; }
         public Step NextStep { get; private set; }
+        public abstract Task Execute(Item item);
     }
 }
