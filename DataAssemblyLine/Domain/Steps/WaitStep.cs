@@ -10,9 +10,9 @@ namespace DataAssemblyLine.Domain.Steps
     {
         public int TimeToWait { get; set; }
 
-        public override async Task Execute(Item item)
+        public override void Execute(Item item)
         {
-            await Task.Delay(TimeToWait * 1000);
+            AddDomainEvent(new WaitStepExecutedEvent(item, TimeToWait));
         }
     }
 }
