@@ -8,6 +8,6 @@ namespace DataAssemblyLine.Domain.Steps
     {
         public string Label { get; private set; }
         public Step NextStep { get; private set; }
-        public abstract void Execute(Item item);
+        public abstract IStepExecutedEvent Execute(Item item);
     }
 }

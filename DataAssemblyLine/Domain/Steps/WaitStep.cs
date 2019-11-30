@@ -10,9 +10,9 @@ namespace DataAssemblyLine.Domain.Steps
     {
         public int TimeToWait { get; set; }
 
-        public override void Execute(Item item)
+        public override IStepExecutedEvent Execute(Item item)
         {
-            AddDomainEvent(new WaitStepExecutedEvent(item, TimeToWait));
+            return new WaitStepExecutedEvent(item, TimeToWait);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAssemblyLine.Domain.Steps
 {
-    public class HttpStepExecutedEvent : INotification
+    public class HttpStepExecutedEvent : IStepExecutedEvent
     {
         public Item Item { get; }
         public string HttpMethod { get; }

@@ -14,6 +14,7 @@ namespace DataAssemblyLine.Domain.Items
         public string InitialData { get; private set; }
         public bool IsFailed { get; private set; }
         public bool IsProcessed { get; private set; }
+        public Step FirstStep { get; private set; }
         public Step LastCompletedStep { get; private set; }
         public DateTime Modified { get; set; }
         public void CompleteStep(Step stepCompleted, string data)

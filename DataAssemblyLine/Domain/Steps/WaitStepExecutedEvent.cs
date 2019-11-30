@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAssemblyLine.Domain.Steps
 {
-    public class WaitStepExecutedEvent : INotification
+    public class WaitStepExecutedEvent : IStepExecutedEvent
     {
         public Item Item { get; }
         public int TimeToWait { get; }

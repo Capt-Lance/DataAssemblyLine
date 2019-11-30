@@ -9,6 +9,6 @@ namespace DataAssemblyLine.Application.Process
 {
     public interface IProcessService
     {
-        public Task ProcessItem(Item item);
+        public Task ProcessItemAsync(Item item);
     }
 }
