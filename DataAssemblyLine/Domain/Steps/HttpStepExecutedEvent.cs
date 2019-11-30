@@ -8,9 +8,9 @@ namespace DataAssemblyLine.Domain.Steps
 {
     public class HttpStepExecutedEvent : INotification
     {
-        public readonly Item Item;
-        public readonly string HttpMethod;
-        public readonly string BodyTemplate;
+        public Item Item { get; }
+        public string HttpMethod { get; }
+        public string BodyTemplate { get; }
 
         public HttpStepExecutedEvent(Item item, string httpMethod, string bodyTemplate)
         {

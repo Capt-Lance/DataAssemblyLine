@@ -1,14 +1,15 @@
 ﻿using DataAssemblyLine.Domain.Items;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DataAssemblyLine.Domain.Steps
 {
-    public class WaitStepExecutedEvent
+    public class WaitStepExecutedEvent : INotification
     {
-        readonly Item Item;
-        readonly int TimeToWait;
+        public Item Item { get; }
+        public int TimeToWait { get; }
         
         public WaitStepExecutedEvent(Item item, int timeToWait)
         {
