@@ -14,6 +14,12 @@ namespace DataAssemblyLine.Application.Process
         {
             this.mediator = mediator;
         }
+
+        public Task<List<Item>> GetUnprocessedItemsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task ProcessItemAsync(Item item)
         {
             if (item.LastCompletedStep == null)
