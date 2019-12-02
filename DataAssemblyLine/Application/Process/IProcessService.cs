@@ -11,6 +11,6 @@ namespace DataAssemblyLine.Application.Process
     {
         public Task ProcessItemAsync(Item item);
 
-        public Task<List<Item>> GetUnprocessedItemsAsync();
+        public Task<IEnumerable<Item>> GetUnprocessedItemsAsync();
     }
 }

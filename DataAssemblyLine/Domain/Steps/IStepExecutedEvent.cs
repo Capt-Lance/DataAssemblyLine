@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAssemblyLine.Domain.Steps
 {
-    public interface IStepExecutedEvent : INotification
+    public interface IStepExecutedEvent : IRequest<string>
     {
     }
 }

@@ -28,10 +28,10 @@ namespace DataAssemblyLine.CoordinatorService.Jobs
                 var items = await processService.GetUnprocessedItemsAsync();
 
                 // instead of directly processing them, maybe trigger event or use mediator 
-                //foreach(Item item in items)
-                //{
-                //     processService.ProcessItemAsync(item);
-                //}
+                foreach (Item item in items)
+                {
+                    await processService.ProcessItemAsync(item);
+                }
             }
             catch (Exception ex)
             {

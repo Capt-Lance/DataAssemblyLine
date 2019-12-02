@@ -1,5 +1,8 @@
 ﻿using DataAssemblyLine.Application.Process;
+using DataAssemblyLine.Application.Process.Handlers;
 using DataAssemblyLine.CoordinatorService.Jobs;
+using DataAssemblyLine.Domain.Items;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using Quartz.Impl;
@@ -19,6 +22,9 @@ namespace DataAssemblyLine.CoordinatorService
             _scheduler = await _schedulerFactory.GetScheduler();
             var services = new ServiceCollection();
             services.AddSingleton<IProcessService, ProcessService>();
+            services.AddTransient<IItemRepository, FakeItemRepository>();
+            services.AddTransient<RunProcessJob>();
+            services.AddMediatR(typeof(HttpStepExecutedHandler).Assembly);
             //services.AddTransient<DataRetrievalJob>();
             //services.AddTransient<EFEmployeeRepository>();
             var container = services.BuildServiceProvider();

@@ -10,21 +10,24 @@ namespace DataAssemblyLine.Application.Process
     public class ProcessService : IProcessService
     {
         private readonly IMediator mediator;
-        public ProcessService(IMediator mediator)
+        private readonly IItemRepository itemRepository;
+        public ProcessService(IMediator mediator, IItemRepository itemRepository)
         {
             this.mediator = mediator;
+            this.itemRepository = itemRepository;
         }
 
-        public Task<List<Item>> GetUnprocessedItemsAsync()
+        public async Task<IEnumerable<Item>> GetUnprocessedItemsAsync()
         {
-            throw new NotImplementedException();
+            var items = await itemRepository.GetItemsAsync();
+            return items;
         }
 
         public async Task ProcessItemAsync(Item item)
         {
             if (item.LastCompletedStep == null)
             {
-                await mediator.Publish(item.FirstStep.Execute(item));
+                string result = await mediator.Send(item.FirstStep.Execute(item));
             }
         }
     }

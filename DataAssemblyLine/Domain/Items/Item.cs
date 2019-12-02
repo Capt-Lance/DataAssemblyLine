@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAssemblyLine.Domain.Items
 {
-    public abstract class Item: AggregateRoot
+    public class Item: AggregateRoot
     {
         public DateTime Created { get; set; }
         public string CurrentData { get; private set; }
@@ -46,6 +46,15 @@ namespace DataAssemblyLine.Domain.Items
             Modified = DateTime.UtcNow;
             IsProcessed = true;
             AddDomainEvent(new ItemProcessCompletedEvent());
+        }
+
+        public static Item CreateNew(Step firstStep)
+        {
+            Item item = new Item();
+            item.FirstStep = firstStep;
+            item.IsProcessed = false;
+            item.IsFailed = false;
+            return item;
         }
     }
 }
