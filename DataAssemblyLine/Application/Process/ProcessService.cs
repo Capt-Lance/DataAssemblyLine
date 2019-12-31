@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using DataAssemblyLine.Application.Process.CommandRepositories;
 using DataAssemblyLine.Domain.Items;
@@ -27,9 +28,9 @@ namespace DataAssemblyLine.Application.Process
             return items;
         }
 
-        public async Task ProcessPendingItemAsync(Item item)
+        public async Task ProcessPendingItemAsync(Item item, CancellationToken cancellationToken)
         {
-            while (item.IsPending())
+            while (item.IsPending() && cancellationToken.IsCancellationRequested)
             {
                 await ProcessItemAsync(item);
             }
