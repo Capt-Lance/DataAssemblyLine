@@ -7,20 +7,25 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DataAssemblyLine.Application.Process.Handlers
+namespace DataAssemblyLine.Application.Process.HttpSteps.Handlers
 {
-    public class HttpStepExecutedHandler : IRequestHandler<HttpStepExecutedEvent, string>
+    public class ExecuteHttpStepCommandHandler : IRequestHandler<ExecuteHttpStepCommand>
     {
-        public async Task<string> Handle(HttpStepExecutedEvent notification, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(ExecuteHttpStepCommand notification, CancellationToken cancellationToken)
         {
             HttpClient httpClient = new HttpClient();
             var result = await httpClient.GetAsync("https://google.com");
             if (result.IsSuccessStatusCode)
             {
                 string data = await result.Content.ReadAsStringAsync();
-                return data;
             }
-            throw new NotImplementedException();
+            else
+            {
+                notification.Item.SetStepFailed(result.ReasonPhrase);
+            }
+            return Unit.Value;
         }
+
+
     }
 }

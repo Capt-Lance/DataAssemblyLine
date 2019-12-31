@@ -1,22 +1,33 @@
 ﻿using DataAssemblyLine.Domain.Common;
 using DataAssemblyLine.Domain.Steps;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DataAssemblyLine.Domain.Items
 {
-    public class Item: AggregateRoot
+    public class Item : AggregateRoot
     {
         public DateTime Created { get; set; }
         public string CurrentData { get; private set; }
         public string FailureMessage { get; private set; }
+        public Step FirstStep { get; private set; }
         public string InitialData { get; private set; }
         public bool IsFailed { get; private set; }
+
         public bool IsProcessed { get; private set; }
-        public Step FirstStep { get; private set; }
+
         public Step LastCompletedStep { get; private set; }
+
         public DateTime Modified { get; set; }
+
+        public static Item CreateNew(Step firstStep)
+        {
+            Item item = new Item();
+            item.FirstStep = firstStep;
+            item.IsProcessed = false;
+            item.IsFailed = false;
+            return item;
+        }
+
         public void CompleteStep(Step stepCompleted, string data)
         {
             LastCompletedStep = stepCompleted;
@@ -24,11 +35,24 @@ namespace DataAssemblyLine.Domain.Items
             Modified = DateTime.UtcNow;
         }
 
-        public void SetStepFailed(string reason)
+        public Step GetNextStep()
         {
-            IsFailed = true;
-            FailureMessage = reason;
-            AddDomainEvent(new ItemStepFailedEvent());
+            Step nextStep = LastCompletedStep == null ? FirstStep : LastCompletedStep.NextStep;
+            return nextStep;
+        }
+
+        public bool IsPending()
+        {
+            return !IsFailed && !IsProcessed;
+        }
+
+        public void SetProcessCompleted(Step stepCompleted, string data)
+        {
+            LastCompletedStep = stepCompleted;
+            CurrentData = data;
+            Modified = DateTime.UtcNow;
+            IsProcessed = true;
+            AddDomainEvent(new ItemProcessedEvent());
         }
 
         public void SetStepCompleted(Step stepCompleted, string data)
@@ -39,22 +63,11 @@ namespace DataAssemblyLine.Domain.Items
             AddDomainEvent(new ItemStepCompletedEvent());
         }
 
-        public void SetProcessCompleted(Step stepCompleted, string data)
+        public void SetStepFailed(string reason)
         {
-            LastCompletedStep = stepCompleted;
-            CurrentData = data;
-            Modified = DateTime.UtcNow;
-            IsProcessed = true;
-            AddDomainEvent(new ItemProcessCompletedEvent());
-        }
-
-        public static Item CreateNew(Step firstStep)
-        {
-            Item item = new Item();
-            item.FirstStep = firstStep;
-            item.IsProcessed = false;
-            item.IsFailed = false;
-            return item;
+            IsFailed = true;
+            FailureMessage = reason;
+            AddDomainEvent(new ItemStepFailedEvent());
         }
     }
 }

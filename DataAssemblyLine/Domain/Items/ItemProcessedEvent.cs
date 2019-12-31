@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAssemblyLine.Domain.Items
 {
-    public class ItemProcessCompletedEvent: INotification
+    public class ItemProcessedEvent: INotification
     {
     }
 }

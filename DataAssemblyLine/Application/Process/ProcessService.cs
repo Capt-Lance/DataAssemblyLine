@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using DataAssemblyLine.Application.Process.CommandRepositories;
 using DataAssemblyLine.Domain.Items;
+using DataAssemblyLine.Domain.Steps;
 using MediatR;
 
 namespace DataAssemblyLine.Application.Process
@@ -11,10 +13,12 @@ namespace DataAssemblyLine.Application.Process
     {
         private readonly IMediator mediator;
         private readonly IItemRepository itemRepository;
-        public ProcessService(IMediator mediator, IItemRepository itemRepository)
+        private readonly IExecuteStepCommandFactory executeStepCommandFactory;
+        public ProcessService(IMediator mediator, IItemRepository itemRepository, IExecuteStepCommandFactory executeStepCommandRepository)
         {
             this.mediator = mediator;
             this.itemRepository = itemRepository;
+            this.executeStepCommandFactory = executeStepCommandRepository;
         }
 
         public async Task<IEnumerable<Item>> GetUnprocessedItemsAsync()
@@ -23,12 +27,20 @@ namespace DataAssemblyLine.Application.Process
             return items;
         }
 
-        public async Task ProcessItemAsync(Item item)
+        public async Task ProcessPendingItemAsync(Item item)
         {
-            if (item.LastCompletedStep == null)
+            while (item.IsPending())
             {
-                string result = await mediator.Send(item.FirstStep.Execute(item));
+                await ProcessItemAsync(item);
             }
+        }
+
+        private async Task ProcessItemAsync(Item item)
+        {
+            Step nextStep = item.GetNextStep();
+            IExecuteStepCommand executeStepCommand = executeStepCommandFactory.GetExecuteStepCommand(nextStep);
+            await mediator.Send(executeStepCommand);
+
         }
     }
 }

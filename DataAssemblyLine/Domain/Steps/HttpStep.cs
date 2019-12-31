@@ -11,9 +11,5 @@ namespace DataAssemblyLine.Domain.Steps
         public string BodyTemplate { get; private set; }
         public string HttpMethod { get; private set; }
 
-        public override IStepExecutedEvent Execute(Item item)
-        {
-            return new HttpStepExecutedEvent(item, BodyTemplate, HttpMethod);
-        }
     }
 }

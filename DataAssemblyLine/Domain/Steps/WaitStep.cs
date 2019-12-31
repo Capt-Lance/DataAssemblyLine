@@ -8,11 +8,7 @@ namespace DataAssemblyLine.Domain.Steps
 {
     public class WaitStep: Step
     {
-        public int TimeToWait { get; set; }
+        public int TimeToWaitInSeconds { get; set; }
 
-        public override IStepExecutedEvent Execute(Item item)
-        {
-            return new WaitStepExecutedEvent(item, TimeToWait);
-        }
     }
 }

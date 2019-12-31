@@ -9,7 +9,7 @@ namespace DataAssemblyLine.Application.Process
 {
     public interface IProcessService
     {
-        public Task ProcessItemAsync(Item item);
+        public Task ProcessPendingItemAsync(Item item);
 
         public Task<IEnumerable<Item>> GetUnprocessedItemsAsync();
     }
