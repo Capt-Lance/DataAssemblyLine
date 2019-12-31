@@ -1,9 +1,6 @@
-﻿using DataAssemblyLine.Domain.Steps;
+﻿using DataAssemblyLine.Application.Process.HttpSteps.Commands;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,7 +22,5 @@ namespace DataAssemblyLine.Application.Process.HttpSteps.Handlers
             }
             return Unit.Value;
         }
-
-
     }
 }

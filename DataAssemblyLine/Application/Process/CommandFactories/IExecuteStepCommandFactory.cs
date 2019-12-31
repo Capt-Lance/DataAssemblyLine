@@ -1,4 +1,5 @@
-﻿using DataAssemblyLine.Domain.Steps;
+﻿using DataAssemblyLine.Domain.Items;
+using DataAssemblyLine.Domain.Steps;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +8,6 @@ namespace DataAssemblyLine.Application.Process.CommandRepositories
 {
     public interface IExecuteStepCommandFactory
     {
-        public IExecuteStepCommand GetExecuteStepCommand(Step step);
+        public IExecuteStepCommand BuildExecuteStepCommand(Step step, Item item);
     }
 }

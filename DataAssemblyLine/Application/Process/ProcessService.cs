@@ -39,7 +39,7 @@ namespace DataAssemblyLine.Application.Process
         private async Task ProcessItemAsync(Item item)
         {
             Step nextStep = item.GetNextStep();
-            IExecuteStepCommand executeStepCommand = executeStepCommandFactory.GetExecuteStepCommand(nextStep);
+            IExecuteStepCommand executeStepCommand = executeStepCommandFactory.BuildExecuteStepCommand(nextStep, item);
             await mediator.Send(executeStepCommand);
 
         }

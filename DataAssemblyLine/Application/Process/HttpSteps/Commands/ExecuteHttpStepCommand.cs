@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAssemblyLine.Application.Process.HttpSteps.Handlers
+namespace DataAssemblyLine.Application.Process.HttpSteps.Commands
 {
     public class ExecuteHttpStepCommand : IExecuteStepCommand
     {
