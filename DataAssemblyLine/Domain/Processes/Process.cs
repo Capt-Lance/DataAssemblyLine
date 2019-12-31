@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAssemblyLine.Domain.Processes
 {
-    public abstract class Process: AggregateRoot
+    public class Process: AggregateRoot
     {
         public Client Client { get; private set; }
         public string Description { get; private set; }

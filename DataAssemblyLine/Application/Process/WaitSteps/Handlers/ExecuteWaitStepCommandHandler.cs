@@ -9,7 +9,7 @@ namespace DataAssemblyLine.Application.Process.WaitSteps.Handlers
     {
         public async Task<Unit> Handle(ExecuteWaitStepCommand notification, CancellationToken cancellationToken)
         {
-            await Task.Delay(notification.TimeToWaitInSeconds * 1000, cancellationToken);
+            await Task.Delay(notification.Step.TimeToWaitInSeconds * 1000, cancellationToken);
             return Unit.Value;
         }
     }

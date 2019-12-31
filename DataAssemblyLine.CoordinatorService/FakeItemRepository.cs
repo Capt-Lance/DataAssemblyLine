@@ -9,10 +9,17 @@ namespace DataAssemblyLine.CoordinatorService
 {
     public class FakeItemRepository : IItemRepository
     {
+        private List<Item> items;
+        public FakeItemRepository()
+        {
+            items.Add
+        }
         public Task<IEnumerable<Item>> GetItemsAsync()
         {
             List<Item> items = new List<Item>();
-            Item item = Item.CreateNew(new HttpStep());
+            Step lastStep = new WaitStep("wait 5s", null, 5);
+            Step firstStep = HttpStep.CreateGetStep("get google.com", lastStep, "https://google.com");
+            Item item = Item.CreateNew();
             items.Add(item);
             return Task.FromResult(items as IEnumerable<Item>);
         }

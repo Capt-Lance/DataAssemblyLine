@@ -9,20 +9,37 @@ namespace DataAssemblyLine.Domain.Items
         public DateTime Created { get; set; }
         public string CurrentData { get; private set; }
         public string FailureMessage { get; private set; }
-        public Step FirstStep { get; private set; }
+
+        //public Step FirstStep { get; private set; }
         public string InitialData { get; private set; }
+
         public bool IsFailed { get; private set; }
 
+        public bool IsPending
+        {
+            get
+            {
+                return !IsFailed && !IsProcessed;
+            }
+        }
+
         public bool IsProcessed { get; private set; }
+
+        public bool IsStarted
+        {
+            get
+            {
+                return LastCompletedStep != null;
+            }
+        }
 
         public Step LastCompletedStep { get; private set; }
 
         public DateTime Modified { get; set; }
 
-        public static Item CreateNew(Step firstStep)
+        public static Item CreateNew()
         {
             Item item = new Item();
-            item.FirstStep = firstStep;
             item.IsProcessed = false;
             item.IsFailed = false;
             return item;
@@ -33,17 +50,6 @@ namespace DataAssemblyLine.Domain.Items
             LastCompletedStep = stepCompleted;
             CurrentData = data;
             Modified = DateTime.UtcNow;
-        }
-
-        public Step GetNextStep()
-        {
-            Step nextStep = LastCompletedStep == null ? FirstStep : LastCompletedStep.NextStep;
-            return nextStep;
-        }
-
-        public bool IsPending()
-        {
-            return !IsFailed && !IsProcessed;
         }
 
         public void SetProcessCompleted(Step stepCompleted, string data)

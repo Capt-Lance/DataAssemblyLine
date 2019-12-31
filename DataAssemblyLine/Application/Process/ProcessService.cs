@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAssemblyLine.Application.Process.CommandRepositories;
 using DataAssemblyLine.Domain.Items;
 using DataAssemblyLine.Domain.Steps;
+using DataAssemblyLine.Domain.Processes;
 using MediatR;
 
 namespace DataAssemblyLine.Application.Process
@@ -24,24 +25,24 @@ namespace DataAssemblyLine.Application.Process
 
         public async Task<IEnumerable<Item>> GetUnprocessedItemsAsync()
         {
-            var items = await itemRepository.GetItemsAsync();
+            var items = await itemRepository.GetItemsAsync().ConfigureAwait(false);
             return items;
         }
 
-        public async Task ProcessPendingItemAsync(Item item, CancellationToken cancellationToken)
+        public async Task ProcessPendingItemAsync(Process process, Item item, CancellationToken cancellationToken)
         {
-            while (item.IsPending() && cancellationToken.IsCancellationRequested)
+            while (item.IsPending && !cancellationToken.IsCancellationRequested)
             {
-                await ProcessItemAsync(item);
+                await ExecuteNextStepAsync(item).ConfigureAwait(false);
             }
         }
 
-        private async Task ProcessItemAsync(Item item)
+        private async Task ExecuteNextStepAsync(Item item)
         {
-            Step nextStep = item.GetNextStep();
+            //Step nextStep = item.GetNextStep();
             IExecuteStepCommand executeStepCommand = executeStepCommandFactory.BuildExecuteStepCommand(nextStep, item);
-            await mediator.Send(executeStepCommand);
-
+            await mediator.Send(executeStepCommand).ConfigureAwait(false);
+            await itemRepository.SaveAsync(item);
         }
     }
 }

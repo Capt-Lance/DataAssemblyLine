@@ -1,5 +1,7 @@
 ﻿using DataAssemblyLine.Domain;
 using DataAssemblyLine.Domain.Items;
+using DataAssemblyLine.Domain.Processes;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +12,7 @@ namespace DataAssemblyLine.Application.Process
 {
     public interface IProcessService
     {
-        public Task ProcessPendingItemAsync(Item item, CancellationToken cancellationToken);
+        public Task ProcessPendingItemAsync(Process process, Item item, CancellationToken cancellationToken);
 
         public Task<IEnumerable<Item>> GetUnprocessedItemsAsync();
     }

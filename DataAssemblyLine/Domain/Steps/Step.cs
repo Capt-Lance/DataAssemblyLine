@@ -8,5 +8,16 @@ namespace DataAssemblyLine.Domain.Steps
     {
         public string Label { get; private set; }
         public Step NextStep { get; private set; }
+
+        public Step(string label, Step nextStep)
+        {
+            Label = label;
+            NextStep = nextStep;
+        }
+
+        public Step(string label)
+        {
+            Label = label;
+        }
     }
 }

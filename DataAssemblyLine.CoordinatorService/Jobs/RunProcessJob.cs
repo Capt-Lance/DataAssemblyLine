@@ -2,6 +2,7 @@
 using DataAssemblyLine.Domain.Items;
 using Quartz;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DataAssemblyLine.CoordinatorService.Jobs
@@ -30,7 +31,7 @@ namespace DataAssemblyLine.CoordinatorService.Jobs
                 // instead of directly processing them, maybe trigger event or use mediator 
                 foreach (Item item in items)
                 {
-                    await processService.ProcessItemAsync(item);
+                    await processService.ProcessPendingItemAsync(item, new CancellationToken());
                 }
             }
             catch (Exception ex)

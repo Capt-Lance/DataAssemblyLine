@@ -8,7 +8,11 @@ namespace DataAssemblyLine.Domain.Steps
 {
     public class WaitStep: Step
     {
-        public int TimeToWaitInSeconds { get; set; }
+        public int TimeToWaitInSeconds { get; private set; }
 
+        public WaitStep(string label, Step nextStep, int timeToWaitInSeconds): base(label, nextStep)
+        {
+            TimeToWaitInSeconds = timeToWaitInSeconds;
+        }
     }
 }
