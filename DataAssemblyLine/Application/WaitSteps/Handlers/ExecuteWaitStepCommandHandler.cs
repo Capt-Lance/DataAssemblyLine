@@ -1,9 +1,9 @@
-﻿using DataAssemblyLine.Application.Process.WaitSteps.Commands;
+﻿using DataAssemblyLine.Application.WaitSteps.Commands;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DataAssemblyLine.Application.Process.WaitSteps.Handlers
+namespace DataAssemblyLine.Application.WaitSteps.Handlers
 {
     public class ExecuteWaitStepCommandHandler : IRequestHandler<ExecuteWaitStepCommand>
     {

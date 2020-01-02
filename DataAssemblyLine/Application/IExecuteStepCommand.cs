@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAssemblyLine.Application.Process
+namespace DataAssemblyLine.Application
 {
     public interface IExecuteStepCommand : IRequest<Unit>
     {

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DataAssemblyLine.Application.Process
+namespace DataAssemblyLine.Application
 {
-    public interface IProcessService
+    public interface IProcessService<T> where T : Process
     {
-        public Task ProcessPendingItemAsync(Process process, Item item, CancellationToken cancellationToken);
+        public Task ProcessPendingItemAsync(T process, Item item, CancellationToken cancellationToken);
 
         public Task<IEnumerable<Item>> GetUnprocessedItemsAsync();
     }

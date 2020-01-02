@@ -9,7 +9,7 @@ namespace DataAssemblyLine.Domain.Items
         public DateTime Created { get; set; }
         public string CurrentData { get; private set; }
         public string FailureMessage { get; private set; }
-
+        public int Id { get; private set; }
         //public Step FirstStep { get; private set; }
         public string InitialData { get; private set; }
 

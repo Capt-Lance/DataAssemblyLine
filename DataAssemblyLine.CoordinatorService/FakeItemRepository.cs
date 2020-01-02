@@ -12,16 +12,21 @@ namespace DataAssemblyLine.CoordinatorService
         private List<Item> items;
         public FakeItemRepository()
         {
-            items.Add
+            items.Add(Item.CreateNew());
         }
         public Task<IEnumerable<Item>> GetItemsAsync()
         {
-            List<Item> items = new List<Item>();
-            Step lastStep = new WaitStep("wait 5s", null, 5);
-            Step firstStep = HttpStep.CreateGetStep("get google.com", lastStep, "https://google.com");
+            //List<Item> items = new List<Item>();
+            //Step lastStep = new WaitStep("wait 5s", null, 5);
+            //Step firstStep = HttpStep.CreateGetStep("get google.com", lastStep, "https://google.com");
             Item item = Item.CreateNew();
-            items.Add(item);
+            //items.Add(item);
             return Task.FromResult(items as IEnumerable<Item>);
+        }
+
+        public Task SaveAsync(Item item)
+        {
+            throw new NotImplementedException();
         }
     }
 }

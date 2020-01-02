@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAssemblyLine.Application.Process.CommandRepositories
+namespace DataAssemblyLine.Application.CommandRepositories
 {
     public interface IExecuteStepCommandFactory
     {

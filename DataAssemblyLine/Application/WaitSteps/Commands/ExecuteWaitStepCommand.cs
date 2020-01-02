@@ -1,7 +1,7 @@
 ﻿using DataAssemblyLine.Domain.Items;
 using DataAssemblyLine.Domain.Steps;
 
-namespace DataAssemblyLine.Application.Process.WaitSteps.Commands
+namespace DataAssemblyLine.Application.WaitSteps.Commands
 {
     public class ExecuteWaitStepCommand : IExecuteStepCommand
     {

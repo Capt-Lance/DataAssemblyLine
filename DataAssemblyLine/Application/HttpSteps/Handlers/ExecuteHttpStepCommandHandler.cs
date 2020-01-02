@@ -1,4 +1,4 @@
-﻿using DataAssemblyLine.Application.Process.HttpSteps.Commands;
+﻿using DataAssemblyLine.Application.HttpSteps.Commands;
 using DataAssemblyLine.Domain.Items;
 using DataAssemblyLine.Domain.Steps;
 using MediatR;
@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DataAssemblyLine.Application.Process.HttpSteps.Handlers
+namespace DataAssemblyLine.Application.HttpSteps.Handlers
 {
     public class ExecuteHttpStepCommandHandler : IRequestHandler<ExecuteHttpStepCommand>
     {

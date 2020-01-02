@@ -1,12 +1,12 @@
-﻿using DataAssemblyLine.Application.Process.HttpSteps.Commands;
-using DataAssemblyLine.Application.Process.WaitSteps.Commands;
+﻿using DataAssemblyLine.Application.HttpSteps.Commands;
+using DataAssemblyLine.Application.WaitSteps.Commands;
 using DataAssemblyLine.Domain.Items;
 using DataAssemblyLine.Domain.Steps;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAssemblyLine.Application.Process.CommandRepositories
+namespace DataAssemblyLine.Application.CommandRepositories
 {
     public class ExecuteStepCommandFactory : IExecuteStepCommandFactory
     {
