@@ -21,12 +21,6 @@ namespace DataAssemblyLine.Application
             this.executeStepCommandFactory = executeStepCommandRepository;
         }
 
-        public async Task<IEnumerable<Item>> GetUnprocessedItemsAsync()
-        {
-            var items = await itemRepository.GetItemsAsync().ConfigureAwait(false);
-            return items;
-        }
-
         public async Task ProcessPendingItemAsync(ItemProcess process, Item item, CancellationToken cancellationToken)
         {
             while (item.IsPending && !cancellationToken.IsCancellationRequested)

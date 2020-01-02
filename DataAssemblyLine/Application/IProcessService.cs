@@ -14,6 +14,5 @@ namespace DataAssemblyLine.Application
     {
         public Task ProcessPendingItemAsync(T process, Item item, CancellationToken cancellationToken);
 
-        public Task<IEnumerable<Item>> GetUnprocessedItemsAsync();
     }
 }

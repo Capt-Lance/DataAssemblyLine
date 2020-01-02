@@ -24,6 +24,11 @@ namespace DataAssemblyLine.CoordinatorService
             return Task.FromResult(items as IEnumerable<Item>);
         }
 
+        public Task<IEnumerable<Item>> GetNonStartedItemsByProcessIdAsync(int processId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task SaveAsync(Item item)
         {
             throw new NotImplementedException();

@@ -7,7 +7,7 @@ namespace DataAssemblyLine.Domain.Items
 {
     public interface IItemRepository
     {
-        public Task<IEnumerable<Item>> GetItemsAsync();
+        public Task<IEnumerable<Item>> GetNonStartedItemsByProcessIdAsync(int processId);
         public Task SaveAsync(Item item);
     }
 }
