@@ -10,6 +10,11 @@ namespace DataAssemblyLine.Domain.Steps
     {
         public int TimeToWaitInSeconds { get; private set; }
 
+        private WaitStep(): base()
+        {
+
+        }
+
         public WaitStep(string label, Step nextStep, int timeToWaitInSeconds): base(label, nextStep)
         {
             TimeToWaitInSeconds = timeToWaitInSeconds;

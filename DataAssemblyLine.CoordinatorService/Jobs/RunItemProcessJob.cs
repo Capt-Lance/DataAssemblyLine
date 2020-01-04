@@ -46,6 +46,7 @@ namespace DataAssemblyLine.CoordinatorService.Jobs
             }
         }
 
+
         private async Task RunProcessAsync(ItemProcess itemProcess)
         {
             var itemsIEnum = await itemRepository.GetNonStartedItemsByProcessIdAsync(itemProcess.Id);
