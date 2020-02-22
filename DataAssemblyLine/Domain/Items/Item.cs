@@ -10,7 +10,6 @@ namespace DataAssemblyLine.Domain.Items
         public string CurrentData { get; private set; }
         public string FailureMessage { get; private set; }
         public int Id { get; private set; }
-        //public Step FirstStep { get; private set; }
         public string InitialData { get; private set; }
 
         public bool IsFailed { get; private set; }
@@ -34,8 +33,8 @@ namespace DataAssemblyLine.Domain.Items
         }
 
         public Step LastCompletedStep { get; private set; }
-
         public DateTime Modified { get; set; }
+        public int ProcessId { get; private set; }
 
         public static Item CreateNew()
         {

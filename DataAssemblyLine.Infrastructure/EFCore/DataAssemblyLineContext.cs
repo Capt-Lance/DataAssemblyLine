@@ -1,4 +1,5 @@
-﻿using DataAssemblyLine.Domain.Processes;
+﻿using DataAssemblyLine.Domain.Items;
+using DataAssemblyLine.Domain.Processes;
 using DataAssemblyLine.Domain.Steps;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,7 @@ namespace DataAssemblyLine.Infrastructure.EFCore
 {
     public class DataAssemblyLineContext : DbContext
     {
+        public DbSet<Item> Item { get; private set; }
         public DbSet<ItemProcess> ItemProcesses { get; set; }
         public DbSet<Process> Processes { get; set; }
         public DbSet<Step> Steps { get; set; }
@@ -16,6 +18,7 @@ namespace DataAssemblyLine.Infrastructure.EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Item>().Ignore(i => i.DomainEvents);
             modelBuilder.Entity<Process>().Ignore(i => i.DomainEvents);
             modelBuilder.Entity<Step>().Ignore(s => s.DomainEvents);
         }

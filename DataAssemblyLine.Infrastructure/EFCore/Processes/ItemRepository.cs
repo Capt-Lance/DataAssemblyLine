@@ -1,6 +1,8 @@
 ﻿using DataAssemblyLine.Domain.Items;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,14 +10,19 @@ namespace DataAssemblyLine.Infrastructure.EFCore.Processes
 {
     public class ItemRepository : IItemRepository
     {
-        public Task<IEnumerable<Item>> GetNonStartedItemsByProcessIdAsync(int processId)
+        private readonly DataAssemblyLineContext context;
+        public ItemRepository(DataAssemblyLineContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
+        }
+        public async Task<IEnumerable<Item>> GetNonStartedItemsByProcessIdAsync(int processId)
+        {
+            return await context.Set<Item>().Where(x => !x.IsStarted && x.ProcessId == processId).ToListAsync();
         }
 
-        public Task SaveAsync(Item item)
+        public async Task SaveAsync(Item item)
         {
-            throw new NotImplementedException();
+            await context.SaveChangesAsync();
         }
     }
 }
