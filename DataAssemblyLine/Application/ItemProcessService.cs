@@ -35,7 +35,7 @@ namespace DataAssemblyLine.Application
             Step nextStep = process.GetNextStep(item);
             IExecuteStepCommand executeStepCommand = executeStepCommandFactory.BuildExecuteStepCommand(nextStep, item);
             await mediator.Send(executeStepCommand).ConfigureAwait(false);
-            await itemRepository.SaveAsync(item);
+            await itemRepository.SaveAsync();
         }
     }
 }

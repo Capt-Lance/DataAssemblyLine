@@ -4,14 +4,16 @@ using DataAssemblyLine.Infrastructure.EFCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAssemblyLine.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(DataAssemblyLineContext))]
-    partial class DataAssemblyLineContextModelSnapshot : ModelSnapshot
+    [Migration("20200325184215_Test")]
+    partial class Test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,9 +59,7 @@ namespace DataAssemblyLine.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("LastCompletedStepId");
 
-                    b.HasIndex("ProcessId");
-
-                    b.ToTable("Items");
+                    b.ToTable("Item");
                 });
 
             modelBuilder.Entity("DataAssemblyLine.Domain.Processes.Process", b =>
@@ -163,12 +163,6 @@ namespace DataAssemblyLine.Infrastructure.EFCore.Migrations
                     b.HasOne("DataAssemblyLine.Domain.Steps.Step", "LastCompletedStep")
                         .WithMany()
                         .HasForeignKey("LastCompletedStepId");
-
-                    b.HasOne("DataAssemblyLine.Domain.Processes.Process", null)
-                        .WithMany()
-                        .HasForeignKey("ProcessId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("DataAssemblyLine.Domain.Processes.Process", b =>

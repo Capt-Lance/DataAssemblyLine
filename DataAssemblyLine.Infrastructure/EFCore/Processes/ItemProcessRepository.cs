@@ -16,10 +16,20 @@ namespace DataAssemblyLine.Infrastructure.EFCore.Processes
             this.context = context;
         }
 
+        public async Task AddAsync(ItemProcess process)
+        {
+            await context.Set<ItemProcess>().AddAsync(process);
+        }
+
         public async Task<IEnumerable<ItemProcess>> GetAllAsync()
         {
             return await context.Set<ItemProcess>().Include(itemProcesses => itemProcesses.Steps).ToListAsync();
 
+        }
+
+        public async Task SaveAsync()
+        {
+            await context.SaveChangesAsync();
         }
     }
 }

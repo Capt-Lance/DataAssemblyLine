@@ -8,5 +8,8 @@ namespace DataAssemblyLine.Domain.Processes
     public interface IProcessRepository<T> where T : Process
     {
         Task<IEnumerable<T>> GetAllAsync();
+        Task AddAsync(T process);
+
+        Task SaveAsync();
     }
 }

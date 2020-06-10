@@ -8,6 +8,8 @@ namespace DataAssemblyLine.Domain.Items
     public interface IItemRepository
     {
         public Task<IEnumerable<Item>> GetNonStartedItemsByProcessIdAsync(int processId);
-        public Task SaveAsync(Item item);
+
+        public Task AddAsync(Item item);
+        public Task SaveAsync();
     }
 }

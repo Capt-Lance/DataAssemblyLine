@@ -6,6 +6,7 @@ namespace DataAssemblyLine.Domain.Items
 {
     public class Item : AggregateRoot
     {
+        private Item() { }
         public DateTime Created { get; set; }
         public string CurrentData { get; private set; }
         public string FailureMessage { get; private set; }
@@ -36,11 +37,13 @@ namespace DataAssemblyLine.Domain.Items
         public DateTime Modified { get; set; }
         public int ProcessId { get; private set; }
 
-        public static Item CreateNew()
+        public static Item CreateNew(int processId, string intialData)
         {
             Item item = new Item();
             item.IsProcessed = false;
             item.IsFailed = false;
+            item.InitialData = intialData;
+            item.ProcessId = processId;
             return item;
         }
 

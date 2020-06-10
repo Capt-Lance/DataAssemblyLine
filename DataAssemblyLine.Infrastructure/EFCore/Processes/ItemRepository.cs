@@ -15,12 +15,18 @@ namespace DataAssemblyLine.Infrastructure.EFCore.Processes
         {
             this.context = context;
         }
+
+        public async Task AddAsync(Item item)
+        {
+            await context.Set<Item>().AddAsync(item);
+        }
+
         public async Task<IEnumerable<Item>> GetNonStartedItemsByProcessIdAsync(int processId)
         {
             return await context.Set<Item>().Where(x => !x.IsStarted && x.ProcessId == processId).ToListAsync();
         }
 
-        public async Task SaveAsync(Item item)
+        public async Task SaveAsync()
         {
             await context.SaveChangesAsync();
         }
